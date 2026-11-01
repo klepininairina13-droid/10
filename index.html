@@ -67,117 +67,134 @@ html, body {
 .catalog-hero { display: none !important; }
 .catalog-hero-emoji { display: none !important; }
 
-/* ===== 3D ПЛАСТИЛИНОВАЯ КНОПКА ===== */
+/* ===== ПУШИСТЫЕ МЕХОВЫЕ КНОПКИ ===== */
 .start-mechanic-btn {
     position: relative;
     border: none;
-    padding: 22px 55px;
-    border-radius: 35px;
-    font-size: 22px;
+    padding: 26px 60px;
+    border-radius: 50px;
+    font-size: 24px;
     font-weight: 900;
     font-family: inherit;
     cursor: pointer;
-    min-width: 260px;
+    min-width: 280px;
     margin-bottom: 5vh;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     color: white;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    /* 3D эффект: верхний блик + нижняя тень + падающая тень */
-    box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.6),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 8px 0 rgba(0,0,0,0.15),
-        0 12px 25px rgba(0,0,0,0.2);
-    transform: translateY(0);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+
+/* Пушистый контур через множественные тени */
+.start-mechanic-btn::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 55px;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+/* Мягкое свечение вокруг кнопки */
+.start-mechanic-btn::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 52px;
+    z-index: -1;
+    filter: blur(4px);
+    opacity: 0.5;
 }
 
 .start-mechanic-btn:active {
-    transform: translateY(6px);
-    box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.6),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 2px 0 rgba(0,0,0,0.15),
-        0 4px 10px rgba(0,0,0,0.2);
+    transform: scale(0.96);
 }
 
-/* КНОПКА 1 — Лягушка: бирюзовый → персиковый */
+/* КНОПКА 1 — Лягушка: мятно-бирюзовый мех */
 .catalog-slide:nth-child(1) .start-mechanic-btn {
-    background: linear-gradient(180deg, #B8E0D8 0%, #8CC8BE 50%, #F4C4A8 100%);
-    color: #3A6A62;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    background: linear-gradient(135deg, #A8E0D0 0%, #7BC9B8 40%, #9BD4C4 100%);
+    color: #2D5A4A;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.4);
     box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 8px 0 #7AB8AE,
-        0 12px 25px rgba(122, 184, 174, 0.4);
+        0 0 0 3px rgba(168, 224, 208, 0.3),
+        0 0 15px 5px rgba(123, 201, 184, 0.4),
+        0 0 30px 10px rgba(123, 201, 184, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
 }
 
-.catalog-slide:nth-child(1) .start-mechanic-btn:active {
-    box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 2px 0 #7AB8AE,
-        0 4px 10px rgba(122, 184, 174, 0.4);
+.catalog-slide:nth-child(1) .start-mechanic-btn::before {
+    background: radial-gradient(ellipse at center, #A8E0D0 0%, #7BC9B8 70%, transparent 100%);
 }
 
-/* КНОПКА 2 — Барашек: розовый → лавандовый */
+.catalog-slide:nth-child(1) .start-mechanic-btn::after {
+    background: radial-gradient(ellipse at center, #B8E8D8 0%, #8DD4C0 100%);
+}
+
+/* КНОПКА 2 — Барашек: розовый мех */
 .catalog-slide:nth-child(2) .start-mechanic-btn {
-    background: linear-gradient(180deg, #F8D0C0 0%, #F4B8A8 50%, #E0C4D8 100%);
-    color: #A06858;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    background: linear-gradient(135deg, #F8C8B8 0%, #F4A898 40%, #F8C0B0 100%);
+    color: #7A4A3A;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.4);
     box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 8px 0 #D8A898,
-        0 12px 25px rgba(216, 168, 152, 0.4);
+        0 0 0 3px rgba(248, 200, 184, 0.3),
+        0 0 15px 5px rgba(244, 168, 152, 0.4),
+        0 0 30px 10px rgba(244, 168, 152, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
 }
 
-.catalog-slide:nth-child(2) .start-mechanic-btn:active {
-    box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 2px 0 #D8A898,
-        0 4px 10px rgba(216, 168, 152, 0.4);
+.catalog-slide:nth-child(2) .start-mechanic-btn::before {
+    background: radial-gradient(ellipse at center, #F8C8B8 0%, #F4A898 70%, transparent 100%);
 }
 
-/* КНОПКА 3 — Дед: лавандовый → розовый */
+.catalog-slide:nth-child(2) .start-mechanic-btn::after {
+    background: radial-gradient(ellipse at center, #FAD0C0 0%, #F8B8A8 100%);
+}
+
+/* КНОПКА 3 — Дед: лавандовый мех */
 .catalog-slide:nth-child(3) .start-mechanic-btn {
-    background: linear-gradient(180deg, #E0D0E8 0%, #D0B8D8 50%, #F0C8D8 100%);
-    color: #8A6880;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    background: linear-gradient(135deg, #D8C8E8 0%, #C0A8D8 40%, #D0B8E0 100%);
+    color: #5A4060;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.4);
     box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 8px 0 #C0A8C8,
-        0 12px 25px rgba(192, 168, 200, 0.4);
+        0 0 0 3px rgba(216, 200, 232, 0.3),
+        0 0 15px 5px rgba(192, 168, 216, 0.4),
+        0 0 30px 10px rgba(192, 168, 216, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
 }
 
-.catalog-slide:nth-child(3) .start-mechanic-btn:active {
-    box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 2px 0 #C0A8C8,
-        0 4px 10px rgba(192, 168, 200, 0.4);
+.catalog-slide:nth-child(3) .start-mechanic-btn::before {
+    background: radial-gradient(ellipse at center, #D8C8E8 0%, #C0A8D8 70%, transparent 100%);
 }
 
-/* КНОПКА 4 — Пингвин: лавандовый → мятный */
+.catalog-slide:nth-child(3) .start-mechanic-btn::after {
+    background: radial-gradient(ellipse at center, #E0D0F0 0%, #D0B8E0 100%);
+}
+
+/* КНОПКА 4 — Пингвин: сиренево-мятный мех */
 .catalog-slide:nth-child(4) .start-mechanic-btn {
-    background: linear-gradient(180deg, #D0C8E8 0%, #B8B0D8 50%, #B8E0D0 100%);
-    color: #6860A0;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    background: linear-gradient(135deg, #C8C0E8 0%, #A8A0D8 40%, #B8B0E0 100%);
+    color: #4A4070;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.4);
     box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 8px 0 #A8A0C8,
-        0 12px 25px rgba(168, 160, 200, 0.4);
+        0 0 0 3px rgba(200, 192, 232, 0.3),
+        0 0 15px 5px rgba(168, 160, 216, 0.4),
+        0 0 30px 10px rgba(168, 160, 216, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
 }
 
-.catalog-slide:nth-child(4) .start-mechanic-btn:active {
-    box-shadow:
-        inset 0 3px 4px rgba(255,255,255,0.7),
-        inset 0 -3px 4px rgba(0,0,0,0.1),
-        0 2px 0 #A8A0C8,
-        0 4px 10px rgba(168, 160, 200, 0.4);
+.catalog-slide:nth-child(4) .start-mechanic-btn::before {
+    background: radial-gradient(ellipse at center, #C8C0E8 0%, #A8A0D8 70%, transparent 100%);
+}
+
+.catalog-slide:nth-child(4) .start-mechanic-btn::after {
+    background: radial-gradient(ellipse at center, #D0C8F0 0%, #B8B0E0 100%);
 }
 
 /* ===== ТОЧКИ СВАЙПА ===== */
@@ -203,7 +220,6 @@ html, body {
     transition: all 0.3s;
 }
 
-/* Цвета активных точек под каждый слайд */
 .catalog-dot.active.color-1 { background: #7BC9A8; width: 24px; border-radius: 4px; }
 .catalog-dot.active.color-2 { background: #F4B8A8; width: 24px; border-radius: 4px; }
 .catalog-dot.active.color-3 { background: #C8B8D8; width: 24px; border-radius: 4px; }
@@ -291,7 +307,7 @@ html, body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 20px 20px;
+    padding: 0 20px 10px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     min-height: 0;
@@ -332,6 +348,94 @@ html, body {
     min-height: 0;
 }
 
+/* ===== ПУШИСТЫЕ КНОПКИ ОТВЕТА (МЕХОВЫЕ) ===== */
+.answer-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.answer-btn {
+    aspect-ratio: 1.4;
+    background: #FFFFFF;
+    border: none;
+    color: #2D2D2D;
+    font-size: 36px;
+    font-weight: 900;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    /* Меховой эффект через множественные мягкие тени */
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,0.8),
+        0 0 10px 3px rgba(0,0,0,0.08),
+        0 0 20px 6px rgba(0,0,0,0.05),
+        inset 0 4px 8px rgba(255,255,255,0.8),
+        inset 0 -4px 8px rgba(0,0,0,0.05);
+}
+
+/* Пушистый контур */
+.answer-btn::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 34px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 60%, transparent 100%);
+    filter: blur(6px);
+    z-index: -1;
+    transition: all 0.2s ease;
+}
+
+.answer-btn:active {
+    transform: scale(0.95);
+}
+
+.answer-btn.correct {
+    background: linear-gradient(135deg, #B8E6CF 0%, #7BC9A8 100%);
+    color: white;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    box-shadow:
+        0 0 0 2px rgba(184, 230, 207, 0.5),
+        0 0 15px 5px rgba(123, 201, 168, 0.4),
+        0 0 30px 10px rgba(123, 201, 168, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
+    animation: popBounce 0.5s ease;
+}
+
+.answer-btn.correct::before {
+    background: radial-gradient(ellipse at center, rgba(184, 230, 207, 0.6) 0%, rgba(123, 201, 168, 0.3) 60%, transparent 100%);
+}
+
+.answer-btn.wrong {
+    background: linear-gradient(135deg, #FFD4C4 0%, #FF9A76 100%);
+    color: white;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    box-shadow:
+        0 0 0 2px rgba(255, 212, 196, 0.5),
+        0 0 15px 5px rgba(255, 154, 118, 0.4),
+        0 0 30px 10px rgba(255, 154, 118, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
+    animation: shake 0.4s ease;
+}
+
+.answer-btn.wrong::before {
+    background: radial-gradient(ellipse at center, rgba(255, 212, 196, 0.6) 0%, rgba(255, 154, 118, 0.3) 60%, transparent 100%);
+}
+
+@keyframes popBounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.08); }
+    70% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
 /* ===== СХЕМА 10 ===== */
 .schema-grid {
     display: flex;
@@ -358,41 +462,6 @@ html, body {
 .schema-cell.filled {
     background: #7BC9A8;
     box-shadow: 0 4px 8px rgba(123, 201, 168, 0.4);
-}
-
-.answer-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    flex-shrink: 0;
-}
-
-.answer-btn {
-    aspect-ratio: 1.3;
-    background: rgba(255,255,255,0.95);
-    border: none;
-    color: #2D2D2D;
-    font-size: 32px;
-    font-weight: 900;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: inherit;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: all 0.2s;
-}
-
-.answer-btn:active { transform: scale(0.95); }
-
-.answer-btn.correct {
-    background: #7BC9A8;
-    color: white;
-    box-shadow: 0 6px 16px rgba(123, 201, 168, 0.4);
-}
-
-.answer-btn.wrong {
-    background: #FF9A76;
-    color: white;
-    animation: shake 0.4s ease;
 }
 
 /* ===== РИСОВАНИЕ ===== */
@@ -541,7 +610,7 @@ html, body {
     border-radius: 24px;
     padding: 25px 20px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     flex-shrink: 0;
 }
@@ -579,116 +648,129 @@ html, body {
     color: white;
 }
 
-/* ===== КНОПКИ ДЕЙСТВИЙ ===== */
+/* ===== ПУШИСТЫЕ КНОПКИ ДЕЙСТВИЙ (МЕХОВЫЕ) ===== */
 .action-btn {
-    background: linear-gradient(135deg, #7BC9A8, #B5EAD7);
+    background: linear-gradient(135deg, #B5EAD7 0%, #7BC9A8 100%);
     color: white;
     border: none;
-    padding: 16px 32px;
-    border-radius: 28px;
-    font-size: 20px;
+    padding: 22px 50px;
+    border-radius: 45px;
+    font-size: 22px;
     font-weight: 800;
     font-family: inherit;
     cursor: pointer;
     margin-top: 15px;
-    box-shadow: 0 6px 16px rgba(123, 201, 168, 0.4);
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     align-self: center;
     display: none;
     flex-shrink: 0;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+    box-shadow:
+        0 0 0 3px rgba(181, 234, 215, 0.3),
+        0 0 15px 5px rgba(123, 201, 168, 0.4),
+        0 0 30px 10px rgba(123, 201, 168, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
 }
 
-.action-btn:active { transform: scale(0.95); }
+.action-btn::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50px;
+    background: radial-gradient(ellipse at center, rgba(181, 234, 215, 0.6) 0%, rgba(123, 201, 168, 0.3) 60%, transparent 100%);
+    filter: blur(6px);
+    z-index: -1;
+}
+
+.action-btn:active {
+    transform: scale(0.96);
+}
 
 .action-btn.visible { display: block; }
 
 .action-btn.wrong {
-    background: linear-gradient(135deg, #FF6B6B, #FF9A9A);
-    box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+    background: linear-gradient(135deg, #FFD4C4 0%, #FF9A76 100%);
+    box-shadow:
+        0 0 0 3px rgba(255, 212, 196, 0.3),
+        0 0 15px 5px rgba(255, 154, 118, 0.4),
+        0 0 30px 10px rgba(255, 154, 118, 0.2),
+        inset 0 4px 8px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
     animation: shake 0.4s ease;
 }
 
-/* ===== БАТАРЕЙКА ===== */
+.action-btn.wrong::before {
+    background: radial-gradient(ellipse at center, rgba(255, 212, 196, 0.6) 0%, rgba(255, 154, 118, 0.3) 60%, transparent 100%);
+}
+
+/* ===== ГОРИЗОНТАЛЬНАЯ БАТАРЕЙКА ВНИЗУ ===== */
 .progress-wrapper {
     position: fixed;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 150;
     display: none;
+    padding: 12px 20px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 12px));
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
 }
 
 .progress-wrapper.visible { display: block; }
 
-.battery-container {
+.battery-horizontal {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
+    width: 100%;
 }
 
-.battery-cap {
-    width: 20px;
-    height: 6px;
-    background: #6BB5FF;
-    border-radius: 3px 3px 0 0;
-}
-
-.battery-body {
-    width: 36px;
-    height: 180px;
-    border: 3px solid #6BB5FF;
-    border-radius: 18px;
-    position: relative;
+.battery-track {
+    flex: 1;
+    height: 14px;
+    background: #E8F4FD;
+    border-radius: 10px;
     overflow: hidden;
-    background: rgba(255,255,255,0.9);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
 }
 
-.battery-fill {
+.battery-fill-h {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6BB5FF 0%, #4A9FD4 100%);
+    border-radius: 10px;
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+.battery-fill-h::after {
+    content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
-    height: 0%;
-    background: linear-gradient(to top, #4A9FD4, #6BB5FF);
-    transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border-radius: 0 0 14px 14px;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+    border-radius: 10px 10px 0 0;
 }
 
-.battery-fill.glow { box-shadow: 0 0 20px rgba(107, 181, 255, 0.8); }
-
-.battery-segments {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
+.battery-fill-h.glow {
+    box-shadow: 0 0 12px rgba(107, 181, 255, 0.6);
 }
 
-.battery-segment {
-    flex: 1;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-}
-
-.battery-segment:last-child { border-bottom: none; }
-
-.battery-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    opacity: 0;
-    transition: opacity 0.4s;
-}
-
-.battery-icon.visible { opacity: 1; }
-
-.battery-percent {
-    font-size: 11px;
+.battery-percent-h {
+    font-size: 13px;
     font-weight: 800;
     color: #6BB5FF;
-    text-align: center;
+    min-width: 40px;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 @keyframes float {
@@ -704,32 +786,26 @@ html, body {
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
 }
 </style>
 </head>
 <body>
 
-<!-- ===== КАТАЛОГ ===== -->
 <div class="catalog-slider" id="catalogSlider">
-    
     <div class="catalog-slide">
         <button class="start-mechanic-btn" onclick="openTrainer(1)">Устный счёт</button>
     </div>
-
     <div class="catalog-slide">
         <button class="start-mechanic-btn" onclick="openTrainer(2)">Запиши цифру</button>
     </div>
-
     <div class="catalog-slide">
         <button class="start-mechanic-btn" onclick="openTrainer(3)">Числовые домики</button>
     </div>
-
     <div class="catalog-slide">
         <button class="start-mechanic-btn" onclick="openTrainer(4)">Примеры</button>
     </div>
-
 </div>
 
 <div class="catalog-dots">
@@ -739,7 +815,6 @@ html, body {
     <div class="catalog-dot color-4"></div>
 </div>
 
-<!-- ===== ТРЕНАЖЁР 1: УСТНЫЙ СЧЁТ ===== -->
 <div class="trainer-overlay bg-1" id="trainer1">
     <div class="trainer-header">
         <button class="exit-btn" onclick="closeTrainer()">←</button>
@@ -758,7 +833,6 @@ html, body {
     </div>
 </div>
 
-<!-- ===== ТРЕНАЖЁР 2: ЗАПИШИ ЦИФРУ ===== -->
 <div class="trainer-overlay bg-2" id="trainer2">
     <div class="trainer-header">
         <button class="exit-btn" onclick="closeTrainer()">←</button>
@@ -784,7 +858,6 @@ html, body {
     </div>
 </div>
 
-<!-- ===== ТРЕНАЖЁР 3: ЧИСЛОВЫЕ ДОМИКИ ===== -->
 <div class="trainer-overlay bg-3" id="trainer3">
     <div class="trainer-header">
         <button class="exit-btn" onclick="closeTrainer()">←</button>
@@ -810,7 +883,6 @@ html, body {
     </div>
 </div>
 
-<!-- ===== ТРЕНАЖЁР 4: ПРИМЕРЫ ===== -->
 <div class="trainer-overlay bg-4" id="trainer4">
     <div class="trainer-header">
         <button class="exit-btn" onclick="closeTrainer()">←</button>
@@ -830,20 +902,11 @@ html, body {
         </div>
     </div>
     <div class="progress-wrapper" id="progressWrapper">
-        <div class="battery-container">
-            <div class="battery-cap"></div>
-            <div class="battery-body">
-                <div class="battery-fill" id="battery-fill"></div>
-                <div class="battery-segments">
-                    <div class="battery-segment"></div>
-                    <div class="battery-segment"></div>
-                    <div class="battery-segment"></div>
-                    <div class="battery-segment"></div>
-                    <div class="battery-segment"></div>
-                </div>
-                <div class="battery-icon" id="battery-icon">⚡</div>
+        <div class="battery-horizontal">
+            <div class="battery-track">
+                <div class="battery-fill-h" id="battery-fill-h"></div>
             </div>
-            <div class="battery-percent" id="battery-percent">0%</div>
+            <div class="battery-percent-h" id="battery-percent-h">0%</div>
         </div>
     </div>
 </div>
@@ -872,7 +935,6 @@ function unlockAudio() {
 document.addEventListener('click', unlockAudio, { once: true });
 document.addEventListener('touchstart', unlockAudio, { once: true });
 
-// ===== КАТАЛОГ С ЦВЕТНЫМИ ТОЧКАМИ =====
 const catalogSlider = document.getElementById('catalogSlider');
 const catalogDots = document.querySelectorAll('.catalog-dot');
 
@@ -880,15 +942,10 @@ catalogSlider.addEventListener('scroll', () => {
     const slideWidth = window.innerWidth;
     const idx = Math.round(catalogSlider.scrollLeft / slideWidth);
     catalogDots.forEach((dot, i) => {
-        if (i === idx) {
-            dot.classList.add('active');
-        } else {
-            dot.classList.remove('active');
-        }
+        dot.classList.toggle('active', i === idx);
     });
 });
 
-// ===== ЗВУК =====
 function toggleSound() {
     voiceEnabled = !voiceEnabled;
     document.querySelectorAll('.sound-btn').forEach(b => b.textContent = voiceEnabled ? '🔊' : '🔇');
@@ -906,7 +963,6 @@ function speak(text) {
     setTimeout(() => window.speechSynthesis.speak(u), 100);
 }
 
-// ===== ОТКРЫТИЕ / ЗАКРЫТИЕ =====
 function openTrainer(num) {
     unlockAudio();
     currentTrainer = num;
@@ -927,37 +983,25 @@ function closeTrainer() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
 
-// ===== ТРЕНАЖЁР 1: УСТНЫЙ СЧЁТ =====
-let t1Task = 1;
-let lastFilled = -1;
-let lastAskFilled = true;
+let t1Task = 1, lastFilled = -1, lastAskFilled = true;
 
 function initTrainer1() {
-    t1Task = 1;
-    lastFilled = -1;
-    lastAskFilled = true;
+    t1Task = 1; lastFilled = -1; lastAskFilled = true;
     generateTask1();
 }
 
 function generateTask1() {
-    if (t1Task > TOTAL_TASKS) {
-        speak('Отлично! Все задания выполнены!');
-        return;
-    }
+    if (t1Task > TOTAL_TASKS) { speak('Отлично! Все задания выполнены!'); return; }
     let filled;
-    do {
-        filled = Math.floor(Math.random() * 8) + 2;
-    } while (filled === lastFilled);
+    do { filled = Math.floor(Math.random() * 8) + 2; } while (filled === lastFilled);
     lastFilled = filled;
     const askFilled = !lastAskFilled;
     lastAskFilled = askFilled;
     const correctAnswer = askFilled ? filled : (10 - filled);
     const questionEl = document.getElementById('task-question-1');
-    if (askFilled) {
-        questionEl.innerHTML = 'Сколько <span class="highlight">зелёных</span> кружочков?';
-    } else {
-        questionEl.innerHTML = 'Сколько <span class="highlight">белых</span> кружочков?';
-    }
+    questionEl.innerHTML = askFilled 
+        ? 'Сколько <span class="highlight">зелёных</span> кружочков?' 
+        : 'Сколько <span class="highlight">белых</span> кружочков?';
     const grid = document.getElementById('schema-grid-1');
     grid.innerHTML = '';
     for (let row = 0; row < 2; row++) {
@@ -974,9 +1018,7 @@ function generateTask1() {
     const opts = document.getElementById('answer-buttons-1');
     opts.innerHTML = '';
     let wrong;
-    do {
-        wrong = Math.max(1, Math.min(9, correctAnswer + (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 3) + 1)));
-    } while (wrong === correctAnswer);
+    do { wrong = Math.max(1, Math.min(9, correctAnswer + (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 3) + 1))); } while (wrong === correctAnswer);
     [correctAnswer, wrong].sort(() => Math.random() - 0.5).forEach(val => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn';
@@ -996,44 +1038,27 @@ function generateTask1() {
         opts.appendChild(btn);
     });
     document.getElementById('counter1').textContent = t1Task + ' / ' + TOTAL_TASKS;
-    if (askFilled) {
-        speak('Сколько зелёных кружочков?');
-    } else {
-        speak('Сколько белых кружочков?');
-    }
+    speak(askFilled ? 'Сколько зелёных кружочков?' : 'Сколько белых кружочков?');
 }
 
-// ===== ТРЕНАЖЁР 2: ЗАПИШИ ЦИФРУ =====
-let t2Task = 1;
-let drawCanvas, drawCtx, isDrawing = false, drawPath = [];
-let lastDrawFilled = -1;
-let lastDrawAskFilled = true;
+let t2Task = 1, drawCanvas, drawCtx, isDrawing = false, drawPath = [];
+let lastDrawFilled = -1, lastDrawAskFilled = true;
 
 function initTrainer2() {
-    t2Task = 1;
-    lastDrawFilled = -1;
-    lastDrawAskFilled = true;
+    t2Task = 1; lastDrawFilled = -1; lastDrawAskFilled = true;
     setupDrawTask();
 }
 
 function setupDrawTask() {
-    if (t2Task > TOTAL_TASKS) {
-        speak('Отлично! Все задания выполнены!');
-        return;
-    }
+    if (t2Task > TOTAL_TASKS) { speak('Отлично! Все задания выполнены!'); return; }
     let filled;
-    do {
-        filled = Math.floor(Math.random() * 8) + 2;
-    } while (filled === lastDrawFilled);
+    do { filled = Math.floor(Math.random() * 8) + 2; } while (filled === lastDrawFilled);
     lastDrawFilled = filled;
     const askFilled = !lastDrawAskFilled;
     lastDrawAskFilled = askFilled;
-    const questionEl = document.getElementById('task-question-2');
-    if (askFilled) {
-        questionEl.innerHTML = 'Сколько <span class="highlight">зелёных</span> кружочков?';
-    } else {
-        questionEl.innerHTML = 'Сколько <span class="highlight">белых</span> кружочков?';
-    }
+    document.getElementById('task-question-2').innerHTML = askFilled 
+        ? 'Сколько <span class="highlight">зелёных</span> кружочков?' 
+        : 'Сколько <span class="highlight">белых</span> кружочков?';
     const grid = document.getElementById('schema-grid-2');
     grid.innerHTML = '';
     for (let row = 0; row < 2; row++) {
@@ -1066,11 +1091,7 @@ function setupDrawTask() {
     btn.textContent = 'Готово';
     btn.onclick = nextDrawTask;
     document.getElementById('counter2').textContent = t2Task + ' / ' + TOTAL_TASKS;
-    if (askFilled) {
-        speak('Сколько зелёных кружочков? Запиши ответ');
-    } else {
-        speak('Сколько белых кружочков? Запиши ответ');
-    }
+    speak(askFilled ? 'Сколько зелёных кружочков? Запиши ответ' : 'Сколько белых кружочков? Запиши ответ');
 }
 
 function startDrawAnswer(e) {
@@ -1101,24 +1122,14 @@ function clearDrawAnswer() {
     drawPath = [];
 }
 
-function nextDrawTask() {
-    t2Task++;
-    setupDrawTask();
-}
+function nextDrawTask() { t2Task++; setupDrawTask(); }
 
-// ===== ТРЕНАЖЁР 3: ЧИСЛОВЫЕ ДОМИКИ =====
 let t3Task = 1;
 
-function initTrainer3() {
-    t3Task = 1;
-    generateHouseTask();
-}
+function initTrainer3() { t3Task = 1; generateHouseTask(); }
 
 function generateHouseTask() {
-    if (t3Task > TOTAL_TASKS) {
-        speak('Отлично! Все задания выполнены!');
-        return;
-    }
+    if (t3Task > TOTAL_TASKS) { speak('Отлично! Все задания выполнены!'); return; }
     const total = Math.floor(Math.random() * 6) + 4;
     const left = Math.floor(total / 2);
     const right = total - left;
@@ -1137,15 +1148,12 @@ function generateHouseTask() {
             dot.classList.add('lit');
             litLeft++;
             if (litLeft === left) {
-                setTimeout(() => {
-                    leftRoom.innerHTML = '<div class="room-value">' + left + '</div>';
-                }, 400);
+                setTimeout(() => { leftRoom.innerHTML = '<div class="room-value">' + left + '</div>'; }, 400);
             }
         };
         leftRoom.appendChild(dot);
     }
-    let litRight = 0;
-    let leftDone = false;
+    let litRight = 0, leftDone = false;
     setTimeout(() => { leftDone = true; }, 800);
     for (let i = 0; i < right; i++) {
         const dot = document.createElement('div');
@@ -1173,41 +1181,26 @@ function generateHouseTask() {
     speak('Нажимай на кружочки');
 }
 
-function nextHouseTask() {
-    t3Task++;
-    generateHouseTask();
-}
+function nextHouseTask() { t3Task++; generateHouseTask(); }
 
-// ===== ТРЕНАЖЁР 4: ПРИМЕРЫ =====
 let t4Task = 1;
 
-function initTrainer4() {
-    t4Task = 1;
-    updateBattery(0);
-    generateEquation();
-}
+function initTrainer4() { t4Task = 1; updateBattery(0); generateEquation(); }
 
 function generateEquation() {
-    if (t4Task > TOTAL_TASKS) {
-        speak('Отлично! Все примеры решены!');
-        return;
-    }
+    if (t4Task > TOTAL_TASKS) { speak('Отлично! Все примеры решены!'); return; }
     const a = Math.floor(Math.random() * 5) + 1;
     const b = Math.floor(Math.random() * 5) + 1;
     const result = a + b;
     const missingValue = Math.random() < 0.5 ? a : b;
     const eqDiv = document.getElementById('equation');
-    if (missingValue === a) {
-        eqDiv.innerHTML = '<span class="question" id="eq-q">?</span><span class="op">+</span><span class="num">' + b + '</span><span class="op">=</span><span class="num">' + result + '</span>';
-    } else {
-        eqDiv.innerHTML = '<span class="num">' + a + '</span><span class="op">+</span><span class="question" id="eq-q">?</span><span class="op">=</span><span class="num">' + result + '</span>';
-    }
+    eqDiv.innerHTML = missingValue === a
+        ? '<span class="question" id="eq-q">?</span><span class="op">+</span><span class="num">' + b + '</span><span class="op">=</span><span class="num">' + result + '</span>'
+        : '<span class="num">' + a + '</span><span class="op">+</span><span class="question" id="eq-q">?</span><span class="op">=</span><span class="num">' + result + '</span>';
     const optsDiv = document.getElementById('equation-buttons');
     optsDiv.innerHTML = '';
     let wrong;
-    do {
-        wrong = Math.max(1, Math.min(9, missingValue + (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 3) + 1)));
-    } while (wrong === missingValue);
+    do { wrong = Math.max(1, Math.min(9, missingValue + (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 3) + 1))); } while (wrong === missingValue);
     [missingValue, wrong].sort(() => Math.random() - 0.5).forEach(val => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn';
@@ -1216,10 +1209,7 @@ function generateEquation() {
             if (val === missingValue) {
                 btn.classList.add('correct');
                 const q = document.getElementById('eq-q');
-                if (q) {
-                    q.textContent = val;
-                    q.classList.add('filled');
-                }
+                if (q) { q.textContent = val; q.classList.add('filled'); }
                 speak('Правильно!');
                 updateBattery(t4Task);
                 t4Task++;
@@ -1237,14 +1227,12 @@ function generateEquation() {
 }
 
 function updateBattery(completed) {
-    const fill = document.getElementById('battery-fill');
-    const percent = document.getElementById('battery-percent');
-    const icon = document.getElementById('battery-icon');
+    const fill = document.getElementById('battery-fill-h');
+    const percent = document.getElementById('battery-percent-h');
     const percentage = Math.round((completed / TOTAL_TASKS) * 100);
-    fill.style.height = percentage + '%';
+    fill.style.width = percentage + '%';
     percent.textContent = percentage + '%';
     if (percentage >= 60) fill.classList.add('glow');
-    if (completed === TOTAL_TASKS) icon.classList.add('visible');
 }
 </script>
 
