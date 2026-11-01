@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Счет до 10</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background: #FFF9F0;
+    position: fixed;
+}
+
+/* ===== КАТАЛОГ ===== */
+.catalog-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.catalog-slider::-webkit-scrollbar { display: none; }
+
+.catalog-slide {
+    min-width: 100vw;
+    width: 100vw;
+    height: 100%;
+    height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 30px;
+    padding-bottom: 15vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.catalog-slide:nth-child(1) { background-image: url('bg-catalog1.jpg'); }
+.catalog-slide:nth-child(2) { background-image: url('bg-catalog2.jpg'); }
+.catalog-slide:nth-child(3) { background-image: url('bg-catalog3.jpg'); }
+.catalog-slide:nth-child(4) { background-image: url('bg-catalog4.jpg'); }
+
+.catalog-hero { display: none !important; }
+.catalog-hero-emoji { display: none !important; }
+
+/* ===== 3D ПЛАСТИЛИНОВАЯ КНОПКА ===== */
+.start-mechanic-btn {
+    position: relative;
+    border: none;
+    padding: 22px 55px;
+    border-radius: 35px;
+    font-size: 22px;
+    font-weight: 900;
+    font-family: inherit;
+    cursor: pointer;
+    min-width: 260px;
+    margin-bottom: 5vh;
+    transition: all 0.15s ease;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    /* 3D эффект: верхний блик + нижняя тень + падающая тень */
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.6),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 8px 0 rgba(0,0,0,0.15),
+        0 12px 25px rgba(0,0,0,0.2);
+    transform: translateY(0);
+}
+
+.start-mechanic-btn:active {
+    transform: translateY(6px);
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.6),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 2px 0 rgba(0,0,0,0.15),
+        0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* КНОПКА 1 — Лягушка: бирюзовый → персиковый */
+.catalog-slide:nth-child(1) .start-mechanic-btn {
+    background: linear-gradient(180deg, #B8E0D8 0%, #8CC8BE 50%, #F4C4A8 100%);
+    color: #3A6A62;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 8px 0 #7AB8AE,
+        0 12px 25px rgba(122, 184, 174, 0.4);
+}
+
+.catalog-slide:nth-child(1) .start-mechanic-btn:active {
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 2px 0 #7AB8AE,
+        0 4px 10px rgba(122, 184, 174, 0.4);
+}
+
+/* КНОПКА 2 — Барашек: розовый → лавандовый */
+.catalog-slide:nth-child(2) .start-mechanic-btn {
+    background: linear-gradient(180deg, #F8D0C0 0%, #F4B8A8 50%, #E0C4D8 100%);
+    color: #A06858;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 8px 0 #D8A898,
+        0 12px 25px rgba(216, 168, 152, 0.4);
+}
+
+.catalog-slide:nth-child(2) .start-mechanic-btn:active {
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 2px 0 #D8A898,
+        0 4px 10px rgba(216, 168, 152, 0.4);
+}
+
+/* КНОПКА 3 — Дед: лавандовый → розовый */
+.catalog-slide:nth-child(3) .start-mechanic-btn {
+    background: linear-gradient(180deg, #E0D0E8 0%, #D0B8D8 50%, #F0C8D8 100%);
+    color: #8A6880;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 8px 0 #C0A8C8,
+        0 12px 25px rgba(192, 168, 200, 0.4);
+}
+
+.catalog-slide:nth-child(3) .start-mechanic-btn:active {
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 2px 0 #C0A8C8,
+        0 4px 10px rgba(192, 168, 200, 0.4);
+}
+
+/* КНОПКА 4 — Пингвин: лавандовый → мятный */
+.catalog-slide:nth-child(4) .start-mechanic-btn {
+    background: linear-gradient(180deg, #D0C8E8 0%, #B8B0D8 50%, #B8E0D0 100%);
+    color: #6860A0;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 8px 0 #A8A0C8,
+        0 12px 25px rgba(168, 160, 200, 0.4);
+}
+
+.catalog-slide:nth-child(4) .start-mechanic-btn:active {
+    box-shadow:
+        inset 0 3px 4px rgba(255,255,255,0.7),
+        inset 0 -3px 4px rgba(0,0,0,0.1),
+        0 2px 0 #A8A0C8,
+        0 4px 10px rgba(168, 160, 200, 0.4);
+}
+
+/* ===== ТОЧКИ СВАЙПА ===== */
+.catalog-dots {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 50;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.catalog-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+/* Цвета активных точек под каждый слайд */
+.catalog-dot.active.color-1 { background: #7BC9A8; width: 24px; border-radius: 4px; }
+.catalog-dot.active.color-2 { background: #F4B8A8; width: 24px; border-radius: 4px; }
+.catalog-dot.active.color-3 { background: #C8B8D8; width: 24px; border-radius: 4px; }
+.catalog-dot.active.color-4 { background: #B8B0D8; width: 24px; border-radius: 4px; }
+
+/* ===== ТРЕНАЖЁР ===== */
+.trainer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+.trainer-overlay.active { display: flex; }
+
+.trainer-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.trainer-overlay > * { position: relative; z-index: 2; }
+
+.trainer-overlay.bg-1 { background: linear-gradient(180deg, #D4F1E5 0%, #F0FFF8 100%); }
+.trainer-overlay.bg-2 { background: linear-gradient(180deg, #FFE5D4 0%, #FFF8F0 100%); }
+.trainer-overlay.bg-3 { background: linear-gradient(180deg, #FFF4D4 0%, #FFFBF0 100%); }
+.trainer-overlay.bg-4 { background: linear-gradient(180deg, #D4E5FF 0%, #F0F5FF 100%); }
+
+.trainer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    padding-top: calc(15px + env(safe-area-inset-top, 15px));
+    flex-shrink: 0;
+}
+
+.exit-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.task-counter {
+    background: rgba(255,255,255,0.95);
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #2D2D2D;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+.sound-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.trainer-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;
+}
+
+.trainer-task-banner {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 14px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.trainer-task-banner .label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #9B9B9B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.trainer-task-banner .question {
+    font-size: 20px;
+    font-weight: 900;
+    color: #2D2D2D;
+}
+
+.trainer-task-banner .question .highlight { color: #7BC9A8; }
+
+.trainer-game-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* ===== СХЕМА 10 ===== */
+.schema-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    margin-bottom: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+.schema-row { display: flex; gap: 10px; justify-content: center; }
+
+.schema-cell {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #F5F5F5;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.schema-cell.filled {
+    background: #7BC9A8;
+    box-shadow: 0 4px 8px rgba(123, 201, 168, 0.4);
+}
+
+.answer-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.answer-btn {
+    aspect-ratio: 1.3;
+    background: rgba(255,255,255,0.95);
+    border: none;
+    color: #2D2D2D;
+    font-size: 32px;
+    font-weight: 900;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.2s;
+}
+
+.answer-btn:active { transform: scale(0.95); }
+
+.answer-btn.correct {
+    background: #7BC9A8;
+    color: white;
+    box-shadow: 0 6px 16px rgba(123, 201, 168, 0.4);
+}
+
+.answer-btn.wrong {
+    background: #FF9A76;
+    color: white;
+    animation: shake 0.4s ease;
+}
+
+/* ===== РИСОВАНИЕ ===== */
+.draw-answer-area {
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    padding: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+    flex-shrink: 0;
+}
+
+.draw-answer-label {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: #2D2D2D;
+    margin-bottom: 10px;
+}
+
+.draw-canvas-wrap {
+    position: relative;
+    background: #FAFAFA;
+    border: 3px dashed #7BC9A8;
+    border-radius: 20px;
+    height: 140px;
+    overflow: hidden;
+}
+
+#drawAnswerCanvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.clear-draw-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #FF9A76;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(255, 154, 118, 0.4);
+}
+
+/* ===== ДОМИКИ ===== */
+.house {
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    overflow: hidden;
+    width: 280px;
+    max-width: 280px;
+    margin: 0 auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.house .roof {
+    background: #FFB84D;
+    color: white;
+    font-size: 44px;
+    font-weight: 900;
+    padding: 18px;
+    text-align: center;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.house .floor { 
+    display: flex; 
+    height: 140px;
+}
+
+.house .room {
+    flex: 1;
+    padding: 15px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 140px;
+    min-height: 140px;
+    max-height: 140px;
+    overflow: hidden;
+}
+
+.house .room:first-child { border-right: 2px solid rgba(0,0,0,0.08); }
+
+.house-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #F5F5F5;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.house-dot:active { transform: scale(0.9); }
+
+.house-dot.lit {
+    background: #FFB84D;
+    box-shadow: 0 4px 8px rgba(255, 184, 77, 0.5);
+}
+
+.house-dot.waiting { opacity: 0.4; cursor: default; }
+
+.room-value {
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFB84D;
+    animation: popIn 0.4s ease;
+}
+
+.house-equation {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #2D2D2D;
+    margin-top: 15px;
+    opacity: 0;
+    transition: opacity 0.4s;
+    min-height: 30px;
+    flex-shrink: 0;
+}
+
+.house-equation.visible { opacity: 1; }
+.house-equation .num { color: #FFB84D; }
+
+/* ===== ПРИМЕРЫ ===== */
+.equation-display {
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    padding: 25px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+.equation {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.equation .num { color: #6BB5FF; }
+.equation .op { color: #2D2D2D; }
+
+.equation .question {
+    min-width: 60px;
+    height: 60px;
+    border: 3px dashed #6BB5FF;
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: #6BB5FF;
+    background: rgba(107, 181, 255, 0.1);
+}
+
+.equation .question.filled {
+    border-style: solid;
+    background: #6BB5FF;
+    color: white;
+}
+
+/* ===== КНОПКИ ДЕЙСТВИЙ ===== */
+.action-btn {
+    background: linear-gradient(135deg, #7BC9A8, #B5EAD7);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 28px;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 6px 16px rgba(123, 201, 168, 0.4);
+    transition: all 0.2s;
+    align-self: center;
+    display: none;
+    flex-shrink: 0;
+}
+
+.action-btn:active { transform: scale(0.95); }
+
+.action-btn.visible { display: block; }
+
+.action-btn.wrong {
+    background: linear-gradient(135deg, #FF6B6B, #FF9A9A);
+    box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+    animation: shake 0.4s ease;
+}
+
+/* ===== БАТАРЕЙКА ===== */
+.progress-wrapper {
+    position: fixed;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 150;
+    display: none;
+}
+
+.progress-wrapper.visible { display: block; }
+
+.battery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.battery-cap {
+    width: 20px;
+    height: 6px;
+    background: #6BB5FF;
+    border-radius: 3px 3px 0 0;
+}
+
+.battery-body {
+    width: 36px;
+    height: 180px;
+    border: 3px solid #6BB5FF;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.battery-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0%;
+    background: linear-gradient(to top, #4A9FD4, #6BB5FF);
+    transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 0 0 14px 14px;
+}
+
+.battery-fill.glow { box-shadow: 0 0 20px rgba(107, 181, 255, 0.8); }
+
+.battery-segments {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.battery-segment {
+    flex: 1;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.battery-segment:last-child { border-bottom: none; }
+
+.battery-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.battery-icon.visible { opacity: 1; }
+
+.battery-percent {
+    font-size: 11px;
+    font-weight: 800;
+    color: #6BB5FF;
+    text-align: center;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== КАТАЛОГ ===== -->
+<div class="catalog-slider" id="catalogSlider">
+    
+    <div class="catalog-slide">
+        <button class="start-mechanic-btn" onclick="openTrainer(1)">Устный счёт</button>
+    </div>
+
+    <div class="catalog-slide">
+        <button class="start-mechanic-btn" onclick="openTrainer(2)">Запиши цифру</button>
+    </div>
+
+    <div class="catalog-slide">
+        <button class="start-mechanic-btn" onclick="openTrainer(3)">Числовые домики</button>
+    </div>
+
+    <div class="catalog-slide">
+        <button class="start-mechanic-btn" onclick="openTrainer(4)">Примеры</button>
+    </div>
+
+</div>
+
+<div class="catalog-dots">
+    <div class="catalog-dot color-1 active"></div>
+    <div class="catalog-dot color-2"></div>
+    <div class="catalog-dot color-3"></div>
+    <div class="catalog-dot color-4"></div>
+</div>
+
+<!-- ===== ТРЕНАЖЁР 1: УСТНЫЙ СЧЁТ ===== -->
+<div class="trainer-overlay bg-1" id="trainer1">
+    <div class="trainer-header">
+        <button class="exit-btn" onclick="closeTrainer()">←</button>
+        <div class="task-counter" id="counter1">1 / 20</div>
+        <button class="sound-btn" onclick="toggleSound()">🔊</button>
+    </div>
+    <div class="trainer-content">
+        <div class="trainer-task-banner">
+            <div class="label">Задание</div>
+            <div class="question" id="task-question-1">Сколько <span class="highlight">зелёных</span> кружочков?</div>
+        </div>
+        <div class="trainer-game-area">
+            <div class="schema-grid" id="schema-grid-1"></div>
+            <div class="answer-buttons" id="answer-buttons-1"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ТРЕНАЖЁР 2: ЗАПИШИ ЦИФРУ ===== -->
+<div class="trainer-overlay bg-2" id="trainer2">
+    <div class="trainer-header">
+        <button class="exit-btn" onclick="closeTrainer()">←</button>
+        <div class="task-counter" id="counter2">1 / 20</div>
+        <button class="sound-btn" onclick="toggleSound()">🔊</button>
+    </div>
+    <div class="trainer-content">
+        <div class="trainer-task-banner">
+            <div class="label">Задание</div>
+            <div class="question" id="task-question-2">Сколько <span class="highlight">зелёных</span> кружочков?</div>
+        </div>
+        <div class="trainer-game-area">
+            <div class="schema-grid" id="schema-grid-2"></div>
+            <div class="draw-answer-area">
+                <div class="draw-answer-label">Запиши ответ пальчиком 👇</div>
+                <div class="draw-canvas-wrap">
+                    <canvas id="drawAnswerCanvas"></canvas>
+                    <button class="clear-draw-btn" onclick="clearDrawAnswer()">🗑</button>
+                </div>
+            </div>
+            <button class="action-btn visible" id="checkDraw" onclick="nextDrawTask()">Готово</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ТРЕНАЖЁР 3: ЧИСЛОВЫЕ ДОМИКИ ===== -->
+<div class="trainer-overlay bg-3" id="trainer3">
+    <div class="trainer-header">
+        <button class="exit-btn" onclick="closeTrainer()">←</button>
+        <div class="task-counter" id="counter3">1 / 20</div>
+        <button class="sound-btn" onclick="toggleSound()">🔊</button>
+    </div>
+    <div class="trainer-content">
+        <div class="trainer-task-banner">
+            <div class="label">Задание</div>
+            <div class="question">Зажги кружочки в домиках</div>
+        </div>
+        <div class="trainer-game-area">
+            <div class="house">
+                <div class="roof" id="house-roof">6</div>
+                <div class="floor">
+                    <div class="room" id="house-room-left"></div>
+                    <div class="room" id="house-room-right"></div>
+                </div>
+            </div>
+            <div class="house-equation" id="house-equation"></div>
+            <button class="action-btn" id="nextHouse" onclick="nextHouseTask()">Дальше</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ТРЕНАЖЁР 4: ПРИМЕРЫ ===== -->
+<div class="trainer-overlay bg-4" id="trainer4">
+    <div class="trainer-header">
+        <button class="exit-btn" onclick="closeTrainer()">←</button>
+        <div class="task-counter" id="counter4">1 / 20</div>
+        <button class="sound-btn" onclick="toggleSound()">🔊</button>
+    </div>
+    <div class="trainer-content">
+        <div class="trainer-task-banner">
+            <div class="label">Задание</div>
+            <div class="question">Какое число пропущено?</div>
+        </div>
+        <div class="trainer-game-area">
+            <div class="equation-display">
+                <div class="equation" id="equation"></div>
+            </div>
+            <div class="answer-buttons" id="equation-buttons"></div>
+        </div>
+    </div>
+    <div class="progress-wrapper" id="progressWrapper">
+        <div class="battery-container">
+            <div class="battery-cap"></div>
+            <div class="battery-body">
+                <div class="battery-fill" id="battery-fill"></div>
+                <div class="battery-segments">
+                    <div class="battery-segment"></div>
+                    <div class="battery-segment"></div>
+                    <div class="battery-segment"></div>
+                    <div class="battery-segment"></div>
+                    <div class="battery-segment"></div>
+                </div>
+                <div class="battery-icon" id="battery-icon">⚡</div>
+            </div>
+            <div class="battery-percent" id="battery-percent">0%</div>
+        </div>
+    </div>
+</div>
+
+<script>
+let voiceEnabled = true;
+let audioUnlocked = false;
+const TOTAL_TASKS = 20;
+let currentTrainer = null;
+
+function unlockAudio() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+    const u = new SpeechSynthesisUtterance('');
+    u.volume = 0;
+    window.speechSynthesis.speak(u);
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+            const ctx = new AudioContext();
+            ctx.resume();
+        }
+    } catch(e) {}
+}
+
+document.addEventListener('click', unlockAudio, { once: true });
+document.addEventListener('touchstart', unlockAudio, { once: true });
+
+// ===== КАТАЛОГ С ЦВЕТНЫМИ ТОЧКАМИ =====
+const catalogSlider = document.getElementById('catalogSlider');
+const catalogDots = document.querySelectorAll('.catalog-dot');
+
+catalogSlider.addEventListener('scroll', () => {
+    const slideWidth = window.innerWidth;
+    const idx = Math.round(catalogSlider.scrollLeft / slideWidth);
+    catalogDots.forEach((dot, i) => {
+        if (i === idx) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+});
+
+// ===== ЗВУК =====
+function toggleSound() {
+    voiceEnabled = !voiceEnabled;
+    document.querySelectorAll('.sound-btn').forEach(b => b.textContent = voiceEnabled ? '🔊' : '🔇');
+    unlockAudio();
+}
+
+function speak(text) {
+    if (!voiceEnabled || !('speechSynthesis' in window)) return;
+    unlockAudio();
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ru-RU';
+    u.rate = 1.0;
+    u.pitch = 1.15;
+    setTimeout(() => window.speechSynthesis.speak(u), 100);
+}
+
+// ===== ОТКРЫТИЕ / ЗАКРЫТИЕ =====
+function openTrainer(num) {
+    unlockAudio();
+    currentTrainer = num;
+    document.getElementById('trainer' + num).classList.add('active');
+    document.getElementById('progressWrapper').classList.toggle('visible', num === 4);
+    if (num === 1) initTrainer1();
+    else if (num === 2) initTrainer2();
+    else if (num === 3) initTrainer3();
+    else if (num === 4) initTrainer4();
+}
+
+function closeTrainer() {
+    if (currentTrainer) {
+        document.getElementById('trainer' + currentTrainer).classList.remove('active');
+    }
+    document.getElementById('progressWrapper').classList.remove('visible');
+    currentTrainer = null;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+
+// ===== ТРЕНАЖЁР 1: УСТНЫЙ СЧЁТ =====
+let t1Task = 1;
+let lastFilled = -1;
+let lastAskFilled = true;
+
+function initTrainer1() {
+    t1Task = 1;
+    lastFilled = -1;
+    lastAskFilled = true;
+    generateTask1();
+}
+
+function generateTask1() {
+    if (t1Task > TOTAL_TASKS) {
+        speak('Отлично! Все задания выполнены!');
+        return;
+    }
+    let filled;
+    do {
+        filled = Math.floor(Math.random() * 8) + 2;
+    } while (filled === lastFilled);
+    lastFilled = filled;
+    const askFilled = !lastAskFilled;
+    lastAskFilled = askFilled;
+    const correctAnswer = askFilled ? filled : (10 - filled);
+    const questionEl = document.getElementById('task-question-1');
+    if (askFilled) {
+        questionEl.innerHTML = 'Сколько <span class="highlight">зелёных</span> кружочков?';
+    } else {
+        questionEl.innerHTML = 'Сколько <span class="highlight">белых</span> кружочков?';
+    }
+    const grid = document.getElementById('schema-grid-1');
+    grid.innerHTML = '';
+    for (let row = 0; row < 2; row++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'schema-row';
+        for (let col = 0; col < 5; col++) {
+            const cell = document.createElement('div');
+            cell.className = 'schema-cell';
+            if (row * 5 + col < filled) cell.classList.add('filled');
+            rowDiv.appendChild(cell);
+        }
+        grid.appendChild(rowDiv);
+    }
+    const opts = document.getElementById('answer-buttons-1');
+    opts.innerHTML = '';
+    let wrong;
+    do {
+        wrong = Math.max(1, Math.min(9, correctAnswer + (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 3) + 1)));
+    } while (wrong === correctAnswer);
+    [correctAnswer, wrong].sort(() => Math.random() - 0.5).forEach(val => {
+        const btn = document.createElement('button');
+        btn.className = 'answer-btn';
+        btn.textContent = val;
+        btn.onclick = () => {
+            if (val === correctAnswer) {
+                btn.classList.add('correct');
+                speak('Правильно!');
+                t1Task++;
+                document.getElementById('counter1').textContent = Math.min(t1Task, TOTAL_TASKS) + ' / ' + TOTAL_TASKS;
+                setTimeout(generateTask1, 1200);
+            } else {
+                btn.classList.add('wrong');
+                setTimeout(() => btn.classList.remove('wrong'), 500);
+            }
+        };
+        opts.appendChild(btn);
+    });
+    document.getElementById('counter1').textContent = t1Task + ' / ' + TOTAL_TASKS;
+    if (askFilled) {
+        speak('Сколько зелёных кружочков?');
+    } else {
+        speak('Сколько белых кружочков?');
+    }
+}
+
+// ===== ТРЕНАЖЁР 2: ЗАПИШИ ЦИФРУ =====
+let t2Task = 1;
+let drawCanvas, drawCtx, isDrawing = false, drawPath = [];
+let lastDrawFilled = -1;
+let lastDrawAskFilled = true;
+
+function initTrainer2() {
+    t2Task = 1;
+    lastDrawFilled = -1;
+    lastDrawAskFilled = true;
+    setupDrawTask();
+}
+
+function setupDrawTask() {
+    if (t2Task > TOTAL_TASKS) {
+        speak('Отлично! Все задания выполнены!');
+        return;
+    }
+    let filled;
+    do {
+        filled = Math.floor(Math.random() * 8) + 2;
+    } while (filled === lastDrawFilled);
+    lastDrawFilled = filled;
+    const askFilled = !lastDrawAskFilled;
+    lastDrawAskFilled = askFilled;
+    const questionEl = document.getElementById('task-question-2');
+    if (askFilled) {
+        questionEl.innerHTML = 'Сколько <span class="highlight">зелёных</span> кружочков?';
+    } else {
+        questionEl.innerHTML = 'Сколько <span class="highlight">белых</span> кружочков?';
+    }
+    const grid = document.getElementById('schema-grid-2');
+    grid.innerHTML = '';
+    for (let row = 0; row < 2; row++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'schema-row';
+        for (let col = 0; col < 5; col++) {
+            const cell = document.createElement('div');
+            cell.className = 'schema-cell';
+            if (row * 5 + col < filled) cell.classList.add('filled');
+            rowDiv.appendChild(cell);
+        }
+        grid.appendChild(rowDiv);
+    }
+    drawCanvas = document.getElementById('drawAnswerCanvas');
+    const wrap = drawCanvas.parentElement;
+    drawCanvas.width = wrap.clientWidth;
+    drawCanvas.height = wrap.clientHeight;
+    drawCtx = drawCanvas.getContext('2d');
+    drawCtx.lineCap = 'round';
+    drawCtx.lineJoin = 'round';
+    drawCtx.lineWidth = 12;
+    drawCtx.strokeStyle = '#2D2D2D';
+    drawPath = [];
+    drawCanvas.onpointerdown = startDrawAnswer;
+    drawCanvas.onpointermove = drawAnswer;
+    drawCanvas.onpointerup = stopDrawAnswer;
+    drawCanvas.onpointerout = stopDrawAnswer;
+    const btn = document.getElementById('checkDraw');
+    btn.className = 'action-btn visible';
+    btn.textContent = 'Готово';
+    btn.onclick = nextDrawTask;
+    document.getElementById('counter2').textContent = t2Task + ' / ' + TOTAL_TASKS;
+    if (askFilled) {
+        speak('Сколько зелёных кружочков? Запиши ответ');
+    } else {
+        speak('Сколько белых кружочков? Запиши ответ');
+    }
+}
+
+function startDrawAnswer(e) {
+    isDrawing = true;
+    const rect = drawCanvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (drawCanvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (drawCanvas.height / rect.height);
+    drawCtx.beginPath();
+    drawCtx.moveTo(x, y);
+    drawPath.push({x, y});
+}
+
+function drawAnswer(e) {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const rect = drawCanvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (drawCanvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (drawCanvas.height / rect.height);
+    drawCtx.lineTo(x, y);
+    drawCtx.stroke();
+    drawPath.push({x, y});
+}
+
+function stopDrawAnswer() { isDrawing = false; }
+
+function clearDrawAnswer() {
+    drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    drawPath = [];
+}
+
+function nextDrawTask() {
+    t2Task++;
+    setupDrawTask();
+}
+
+// ===== ТРЕНАЖЁР 3: ЧИСЛОВЫЕ ДОМИКИ =====
+let t3Task = 1;
+
+function initTrainer3() {
+    t3Task = 1;
+    generateHouseTask();
+}
+
+function generateHouseTask() {
+    if (t3Task > TOTAL_TASKS) {
+        speak('Отлично! Все задания выполнены!');
+        return;
+    }
+    const total = Math.floor(Math.random() * 6) + 4;
+    const left = Math.floor(total / 2);
+    const right = total - left;
+    document.getElementById('house-roof').textContent = total;
+    const leftRoom = document.getElementById('house-room-left');
+    const rightRoom = document.getElementById('house-room-right');
+    leftRoom.innerHTML = '';
+    rightRoom.innerHTML = '';
+    let litLeft = 0;
+    for (let i = 0; i < left; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'house-dot waiting';
+        dot.onclick = () => {
+            if (dot.classList.contains('lit')) return;
+            dot.classList.remove('waiting');
+            dot.classList.add('lit');
+            litLeft++;
+            if (litLeft === left) {
+                setTimeout(() => {
+                    leftRoom.innerHTML = '<div class="room-value">' + left + '</div>';
+                }, 400);
+            }
+        };
+        leftRoom.appendChild(dot);
+    }
+    let litRight = 0;
+    let leftDone = false;
+    setTimeout(() => { leftDone = true; }, 800);
+    for (let i = 0; i < right; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'house-dot waiting';
+        dot.onclick = () => {
+            if (dot.classList.contains('lit') || !leftDone) return;
+            dot.classList.remove('waiting');
+            dot.classList.add('lit');
+            litRight++;
+            if (litRight === right) {
+                setTimeout(() => {
+                    rightRoom.innerHTML = '<div class="room-value">' + right + '</div>';
+                    const eq = document.getElementById('house-equation');
+                    eq.innerHTML = '<span class="num">' + total + '</span> = <span class="num">' + left + '</span> + <span class="num">' + right + '</span>';
+                    eq.classList.add('visible');
+                    document.getElementById('nextHouse').classList.add('visible');
+                }, 400);
+            }
+        };
+        rightRoom.appendChild(dot);
+    }
+    document.getElementById('house-equation').classList.remove('visible');
+    document.getElementById('nextHouse').classList.remove('visible');
+    document.getElementById('counter3').textContent = t3Task + ' / ' + TOTAL_TASKS;
+    speak('Нажимай на кружочки');
+}
+
+function nextHouseTask() {
+    t3Task++;
+    generateHouseTask();
+}
+
+// ===== ТРЕНАЖЁР 4: ПРИМЕРЫ =====
+let t4Task = 1;
+
+function initTrainer4() {
+    t4Task = 1;
+    updateBattery(0);
+    generateEquation();
+}
+
+function generateEquation() {
+    if (t4Task > TOTAL_TASKS) {
+        speak('Отлично! Все примеры решены!');
+        return;
+    }
+    const a = Math.floor(Math.random() * 5) + 1;
+    const b = Math.floor(Math.random() * 5) + 1;
+    const result = a + b;
+    const missingValue = Math.random() < 0.5 ? a : b;
+    const eqDiv = document.getElementById('equation');
+    if (missingValue === a) {
+        eqDiv.innerHTML = '<span class="question" id="eq-q">?</span><span class="op">+</span><span class="num">' + b + '</span><span class="op">=</span><span class="num">' + result + '</span>';
+    } else {
+        eqDiv.innerHTML = '<span class="num">' + a + '</span><span class="op">+</span><span class="question" id="eq-q">?</span><span class="op">=</span><span class="num">' + result + '</span>';
+    }
+    const optsDiv = document.getElementById('equation-buttons');
+    optsDiv.innerHTML = '';
+    let wrong;
+    do {
+        wrong = Math.max(1, Math.min(9, missingValue + (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 3) + 1)));
+    } while (wrong === missingValue);
+    [missingValue, wrong].sort(() => Math.random() - 0.5).forEach(val => {
+        const btn = document.createElement('button');
+        btn.className = 'answer-btn';
+        btn.textContent = val;
+        btn.onclick = () => {
+            if (val === missingValue) {
+                btn.classList.add('correct');
+                const q = document.getElementById('eq-q');
+                if (q) {
+                    q.textContent = val;
+                    q.classList.add('filled');
+                }
+                speak('Правильно!');
+                updateBattery(t4Task);
+                t4Task++;
+                document.getElementById('counter4').textContent = Math.min(t4Task, TOTAL_TASKS) + ' / ' + TOTAL_TASKS;
+                setTimeout(generateEquation, 1500);
+            } else {
+                btn.classList.add('wrong');
+                setTimeout(() => btn.classList.remove('wrong'), 500);
+            }
+        };
+        optsDiv.appendChild(btn);
+    });
+    document.getElementById('counter4').textContent = t4Task + ' / ' + TOTAL_TASKS;
+    speak('Какое число пропущено?');
+}
+
+function updateBattery(completed) {
+    const fill = document.getElementById('battery-fill');
+    const percent = document.getElementById('battery-percent');
+    const icon = document.getElementById('battery-icon');
+    const percentage = Math.round((completed / TOTAL_TASKS) * 100);
+    fill.style.height = percentage + '%';
+    percent.textContent = percentage + '%';
+    if (percentage >= 60) fill.classList.add('glow');
+    if (completed === TOTAL_TASKS) icon.classList.add('visible');
+}
+</script>
+
+</body>
+</html>
