@@ -40,6 +40,7 @@ html, body {
 
 .catalog-slider::-webkit-scrollbar { display: none; }
 
+/* Базовый стиль слайда — кнопка внизу */
 .catalog-slide {
     min-width: 100vw;
     width: 100vw;
@@ -64,10 +65,23 @@ html, body {
 .catalog-slide:nth-child(3) { background-image: url('bg-catalog3.jpg'); }
 .catalog-slide:nth-child(4) { background-image: url('bg-catalog4.jpg'); }
 
+/* Слайд 1 — кнопка наверху */
+.catalog-slide:nth-child(1) {
+    justify-content: flex-start;
+    padding-top: 15vh;
+    padding-bottom: 0;
+}
+
+/* Слайд 4 — кнопка посередине */
+.catalog-slide:nth-child(4) {
+    justify-content: center;
+    padding-bottom: 0;
+}
+
 .catalog-hero { display: none !important; }
 .catalog-hero-emoji { display: none !important; }
 
-/* ===== СТЕКЛЯННЫЕ КНОПКИ (как на референсе) ===== */
+/* ===== СТЕКЛЯННЫЕ КНОПКИ ===== */
 .start-mechanic-btn {
     position: relative;
     border: none;
@@ -84,18 +98,15 @@ html, body {
     overflow: hidden;
     letter-spacing: 0.5px;
     
-    /* Стеклянный фон */
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     
-    /* Верхний блик — как на стекле */
     border-top: 1.5px solid rgba(255, 255, 255, 0.8);
     border-left: 1px solid rgba(255, 255, 255, 0.4);
     border-right: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     
-    /* Тень снизу — толщина стекла */
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
         0 2px 8px rgba(0, 0, 0, 0.08),
@@ -103,7 +114,6 @@ html, body {
         inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* Внутренний блик сверху */
 .start-mechanic-btn::before {
     content: '';
     position: absolute;
@@ -116,7 +126,6 @@ html, body {
     pointer-events: none;
 }
 
-/* Нижняя тень-отражение */
 .start-mechanic-btn::after {
     content: '';
     position: absolute;
@@ -139,7 +148,6 @@ html, body {
     background: rgba(255, 255, 255, 0.35);
 }
 
-/* КНОПКА 1 — Лягушка: мятное стекло */
 .catalog-slide:nth-child(1) .start-mechanic-btn {
     color: #2D6A5A;
     text-shadow: 0 1px 2px rgba(255,255,255,0.6);
@@ -153,7 +161,6 @@ html, body {
         inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* КНОПКА 2 — Барашек: розовое стекло */
 .catalog-slide:nth-child(2) .start-mechanic-btn {
     color: #7A4A3A;
     text-shadow: 0 1px 2px rgba(255,255,255,0.6);
@@ -167,7 +174,6 @@ html, body {
         inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* КНОПКА 3 — Дед: лавандовое стекло */
 .catalog-slide:nth-child(3) .start-mechanic-btn {
     color: #5A4060;
     text-shadow: 0 1px 2px rgba(255,255,255,0.6);
@@ -181,7 +187,6 @@ html, body {
         inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* КНОПКА 4 — Пингвин: сиреневое стекло */
 .catalog-slide:nth-child(4) .start-mechanic-btn {
     color: #4A4070;
     text-shadow: 0 1px 2px rgba(255,255,255,0.6);
@@ -376,7 +381,6 @@ html, body {
     z-index: 1;
     transition: all 0.2s ease;
     
-    /* Стеклянные границы */
     border-top: 1.5px solid rgba(255,255,255,0.9);
     border-left: 1px solid rgba(255,255,255,0.5);
     border-right: 1px solid rgba(255,255,255,0.3);
